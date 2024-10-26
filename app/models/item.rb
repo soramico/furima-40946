@@ -3,7 +3,6 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one :order
-  has_one_attached :image
 
   # アクティブハッシュとのアソシエーション
   belongs_to :category
@@ -11,6 +10,8 @@ class Item < ApplicationRecord
   belongs_to :contribution
   belongs_to :prefecture
   belongs_to :day
+
+  has_one_attached :image
 
   with_options presence: true do
     validates :user_id
@@ -32,5 +33,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :day_id
   end
-
 end
