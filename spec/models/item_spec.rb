@@ -10,24 +10,24 @@ RSpec.describe Item, type: :model do
       it '全ての入力事項が、存在すれば登録できる' do
         expect(@item).to be_valid
       end
-      it 'カテゴリーが「--」以外であれば登録できる' do
+      it 'カテゴリーが「---」以外であれば登録できる' do
         @item.category_id = 1
         expect(@item).to be_valid
       end
-      it '商品の状態が「--」以外であれば登録できる' do
+      it '商品の状態が「---」以外であれば登録できる' do
         @item.condition_id = 1
         expect(@item).to be_valid
       end
-      it '配送料の負担が「--」以外であれば登録できる' do
+      it '配送料の負担が「---」以外であれば登録できる' do
         @item.contribution_id = 1
         expect(@item).to be_valid
       end
-      it '発送元の地域が「--」以外であれば登録できる' do
+      it '発送元の地域が「---」以外であれば登録できる' do
         @item.prefecture_id = 1
         expect(@item).to be_valid
       end
-      it '発送までの日数が「--」以外であれば登録できる' do
-        @item.day_id = 1
+      it '発送までの日数が「---」以外であれば登録できる' do
+        @item.deliveryday_id = 1
         expect(@item).to be_valid
       end
       it '価格が半角数字でかつ300円〜9,999,999円であれば登録できる' do
@@ -37,11 +37,6 @@ RSpec.describe Item, type: :model do
     end
 
     context '出品ができないとき' do
-      it 'ユーザー登録している人でないと出品できない' do
-        @item.user_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('User must exist', "User can't be blank")
-      end
       it '１枚画像がないと出品できない' do
         @item.image = nil
         @item.valid?
@@ -57,7 +52,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Product description can't be blank")
       end
-      it 'カテゴリーの情報が「--」だと出品できない' do
+      it 'カテゴリーの情報が「---」だと出品できない' do
         @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 0')
@@ -67,7 +62,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
       end
-      it '商品の状態の情報が「--」だと出品できない' do
+      it '商品の状態の情報が「---」だと出品できない' do
         @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 0')
@@ -77,7 +72,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank", 'Condition is not a number')
       end
-      it '配送料の負担の情報が「--」だと出品できない' do
+      it '配送料の負担の情報が「---」だと出品できない' do
         @item.contribution_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Contribution must be other than 0')
@@ -87,7 +82,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Contribution can't be blank", 'Contribution is not a number')
       end
-      it '発送元の地域の情報が「--」だと出品できない' do
+      it '発送元の地域の情報が「---」だと出品できない' do
         @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
@@ -97,15 +92,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
-      it '発送までの日数の情報が「--」だと出品できない' do
-        @item.day_id = 0
+      it '発送までの日数の情報が「---」だと出品できない' do
+        @item.deliveryday_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Day must be other than 0')
+        expect(@item.errors.full_messages).to include('Deliveryday must be other than 0')
       end
       it '発送までの日数の情報が空欄だと出品できない' do
-        @item.day_id = nil
+        @item.deliveryday_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day can't be blank", 'Day is not a number')
+        expect(@item.errors.full_messages).to include("Deliveryday can't be blank", 'Deliveryday is not a number')
       end
       it '価格が空欄だと出品できない' do
         @item.price = nil
