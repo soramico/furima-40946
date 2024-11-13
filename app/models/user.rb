@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :items
-  # has_many :orders
+  has_many :orders
 
   with_options presence: true do
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
